@@ -7,6 +7,8 @@ export interface Question {
   label: string;
   options?: string[];
   required?: boolean;
+  pattern?: RegExp;            
+  errorMessage?: string;
 }
 
 export interface Screen {
@@ -28,14 +30,14 @@ export const formConfig: Chapter[] = [
       {
         id: 'screen1',
         questions: [
-          { id: 'q1', type: 'text', label: 'First Name', required: true },
-          { id: 'q2', type: 'text', label: 'Last Name', required: true },
+          { id: 'q1', type: 'text', label: 'First Name', required: true, pattern: /^[A-Za-z]+$/, errorMessage: 'Invalid first name'},
+          { id: 'q2', type: 'text', label: 'Last Name', required: true, pattern: /^[A-Za-z]+$/, errorMessage: 'Invalid last name' },
         ],
       },
       {
         id: 'screen2',
         questions: [
-          { id: 'q3', type: 'radio', label: 'Gender', options: ['Male', 'Female', 'Other'], required: true },
+          { id: 'q3', type: 'radio', label: 'Gender', options: ['Male', 'Female', 'Other'], required: true},
           { id: 'q4', type: 'checkbox', label: 'Hobbies', options: ['Reading', 'Traveling', 'Gaming'], required: true },
         ],
       },
@@ -48,8 +50,8 @@ export const formConfig: Chapter[] = [
       {
         id: 'screen3',
         questions: [
-          { id: 'q5', type: 'text', label: 'Current Job', required: true },
-          { id: 'q6', type: 'text', label: 'Experience (Years)', required: true },
+          { id: 'q5', type: 'text', label: 'Current Job', required: true,  pattern: /^[A-Za-z]+$/, errorMessage: 'Invalid. Enter a valid job title'},
+          { id: 'q6', type: 'text', label: 'Experience (Years)', required: true, pattern: /[0-9]+/, errorMessage: 'Invalid. Enter a number'},
         ],
       },
       {
